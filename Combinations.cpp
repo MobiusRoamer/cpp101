@@ -1,0 +1,70 @@
+//
+// Created by alyss on 27/11/2025.
+//
+
+// I am very close, why am I printing a repetition of the very last combination in lexicographic order?
+
+#include <vector>
+#include <iostream>
+using namespace std;
+
+class Combinations{
+
+public:
+    vector<vector<int>> combine(int b, int k) {
+
+        vector<vector<int>> out;
+        if (b == 0 || k == 0) return out;
+
+        // we could use an explicit array of elements from 1 to b, but we could also use an index tracker
+        vector<int> path;
+        vector<bool> used(b, false);
+        for (int i = 0; i < b; i ++) {
+            dfs(out, path, i, b, k);
+        }
+
+        // dfs(out, path, 0, b, k); Don't do this! this means we always return to the parent function call starting all over againt at 0
+        return out;
+
+    }
+
+private:
+    // NOTE on ERROR:
+    // consider the incorrect signature:
+    // void dfs(vector<vector<int>> out, vector<int> path, vector<bool> used, vector<int> nums) {
+    // This means passing parameters BY VALUE
+    // so inside dfs(), when we want to out.push_back(path); we will be adding to a LOCAL COPY of out
+    // but when dfs returns to the parent call, the original out in permute() is still empty
+    // then permite returns an empty vector<vector<int>> and nothing prints
+    void dfs(vector<vector<int>>& out, vector<int>& path, int currIndex, int b, int k) {
+
+        if (size(path) == k) { out.push_back(path); return; } // found a new path
+
+        for (int i = currIndex; i < b ; i++) {
+
+            // backtracking template: choose -- explore -- unchoose
+            // choose
+            path.push_back(i);
+
+            // explore
+            dfs(out, path, i + 1, b, k);
+            // unchoose
+            path.pop_back();
+        }
+    }
+};
+
+static void printVector(vector<int> v) {
+    for (int i = 0; i < size(v); ++i) {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    Combinations p;
+    vector<vector<int>> output = p.combine(4, 2);
+    for (int i = 0; i < output.size(); ++i) {
+        printVector(output[i]);
+    }
+}
