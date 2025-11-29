@@ -1,7 +1,7 @@
 # Basics
 
 ## Header Files (.cpp; .h)
-When we have a large amount of functions we need to organise them in a smarter way. 
+When we have a large amount of functions we need to organize them in a smarter way. 
 We create a separate source `.cpp` file with functionalities and a header file that enables us to include the source file. 
 
 In particular we can
@@ -30,4 +30,5 @@ Now:
 ```
 
 But don't compile directly, we are not accessing any functionalities yet. We need to compile `func.cpp` 
+
 
