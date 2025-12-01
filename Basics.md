@@ -30,9 +30,31 @@
         complex& operator *= (complex z);
         complex& operator /= (complex z);
    ```
+   
+---
+
+### Pointers, Object References
+For a type `T`, `T*` is a variable of type `T*` that can hold the address of an object of type `T`. For example, 
+```cpp
+char c = 'a';
+char* p = &c; // p holds the address of c; & is the "address-of" operator
+```
+Note we can dereference as follows
+```cpp
+char c = 'a';
+char* p = &c;
+char c2 = *p;
+```
+which means we use a variable to point to the object referred to by `p` (that is, `a`) so `c2` essentially points to `a` now. 
+We have removed the reference layer `p`.
+
+---
 ### Overloading
 A compile time polymorphism in where the compiler infers which of the functions sharing the same name to call depending on input arguments. 
 
+Overloading is usually applied to operators. An operator function must either be a member r take at least one argument of a user-defined type.
+
+In particular, it is impossible to define an operator function that operates exclusively on pointers. 
 The template of overloading, for example, the addition operator `+=`, with generic class, is 
 ```cpp
 MyClass& operator += (const MyClass& other) {
@@ -40,7 +62,15 @@ MyClass& operator += (const MyClass& other) {
    //...
    // return *this;
 }
+
+// for example
+enum Day { sun, mon, tue, wed, thu, fri, sat }
+Day& operator++(Day& d)
+{
+   return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
+}
 ```
+
 
 ### Class
 Concepts are defined using classes. There are concrete, abstract classes, also those in hierarchies. 
@@ -78,6 +108,7 @@ Now:
 ```
 
 But don't compile directly, we are not accessing any functionalities yet. We need to first compile `func.cpp`. 
+
 
 
 
