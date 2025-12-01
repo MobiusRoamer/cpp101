@@ -1,7 +1,40 @@
 # Basics
 
-## Abstraction Mechanisms
-### Types
+
+## 1. Header Files (.cpp; .h)
+When we have a large amount of functions we need to organize them in a smarter way.
+We create a separate source `.cpp` file with functionalities and a header file that enables us to include the source file.
+
+In particular we can
+- In the root directory make a new `cpp` file called `main.cpp`
+- Make a new directory, called "includes"
+- Make a new `func.cpp` file, write functionalities we wish to outsource to this file
+- Back in the `main.cpp`, at the top write `#include "includes/func.cpp"`
+```
+/root
+|____main.cpp
+|____/includes
+     |____func.cpp
+```
+But this is bad practice. Doing so means all the cpp functionalities are public to the reader. In many situations we wish to
+obscure the real functionalities' logic but only expose the high level framework.
+Now:
+- In dir "includes", create the same-name file called `func.h` but ending with a header.
+- Transport all methods in `func.cpp` over but remove the method bodies, keep the signature only
+- Now in `main.cpp`, at the top write `#include "includes/func.h"` (this is our source file)
+```
+/root
+|____main.cpp
+|____/includes
+     |____func.cpp
+     |____func.h
+```
+
+But don't compile directly, we are not accessing any functionalities yet. We need to first compile `func.cpp`.
+
+## 2. Abstraction Mechanisms
+
+### 2.1 Types
 1. Concrete type: 
    Can be instantiated using the `new` operator.
    The compiler knows the exact memory layout and size of objects at compile time, hence concrete types can be allocated on stack. 
@@ -33,12 +66,31 @@
    
 ---
 
-### Pointers, Object References
-For a type `T`, `T*` is a variable of type `T*` that can hold the address of an object of type `T`. For example, 
+### 2.2 Pointers
+Pointers are abstraction that aim to help programmers avoid addressing errors. 
+
+For a type `T`, `T*` is a variable of type `T*` that can hold the address of an object of type `T`. 
+
+For a variable `V`, `*V` is the value at the address pointed to by the generic variable `V`.
+ ```cpp
+ int *up; // variable ip is  apointer to an object of type int
+ char **cpp; // cpp is a pointer to an object that is itself a pointer to a character variable
+ ```
+The special type `void*` represents a generic pointer for which we do not know the type it refers to. 
+
+We can assign variables using pointers, 
 ```cpp
 char c = 'a';
 char* p = &c; // p holds the address of c; & is the "address-of" operator
 ```
+
+Before considering what pointers can do, it is useful to understand why we need pointers in C++.
+Pointers are the underlying way
+#### 2.2.1 Creating a Pointer
+Pointers are created using the `&` operator. This operator can be applied to any C++ expression that is categorized as 
+`lvalue`, an expression that can appear on teh left side of an assignment.
+#### 2.2.2 Dereferencing 
+Pointers are dereferenced using the `*` operator. This gives back a value having the type associated with the pointer. 
 Note we can dereference as follows
 ```cpp
 char c = 'a';
@@ -47,6 +99,13 @@ char c2 = *p;
 ```
 which means we use a variable to point to the object referred to by `p` (that is, `a`) so `c2` essentially points to `a` now. 
 We have removed the reference layer `p`.
+
+We can therefore modify a variable's value using a pointer
+```cpp
+int myVariable = 10;
+int* myPointer = &myVariable; // myPointer holds the memory address of myVariable
+*myPointer = 20; // changes the value of myVariable to 20
+```
 
 ---
 ### Overloading
@@ -77,40 +136,3 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
-
-## Header Files (.cpp; .h)
-When we have a large amount of functions we need to organize them in a smarter way. 
-We create a separate source `.cpp` file with functionalities and a header file that enables us to include the source file. 
-
-In particular we can
-- In the root directory make a new `cpp` file called `main.cpp`
-- Make a new directory, called "includes"
-- Make a new `func.cpp` file, write functionalities we wish to outsource to this file
-- Back in the `main.cpp`, at the top write `#include "includes/func.cpp"`
-```
-/root
-|____main.cpp
-|____/includes
-     |____func.cpp
-```
-But this is bad practice. Doing so means all the cpp functionalities are public to the reader. In many situations we wish to 
-obscure the real functionalities' logic but only expose the high level framework. 
-Now: 
-- In dir "includes", create the same-name file called `func.h` but ending with a header. 
-- Transport all methods in `func.cpp` over but remove the method bodies, keep the signature only
-- Now in `main.cpp`, at the top write `#include "includes/func.h"` (this is our source file)
-```
-/root
-|____main.cpp
-|____/includes
-     |____func.cpp
-     |____func.h
-```
-
-But don't compile directly, we are not accessing any functionalities yet. We need to first compile `func.cpp`. 
-
-
-
-
-
-
