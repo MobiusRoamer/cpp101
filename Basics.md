@@ -67,7 +67,8 @@ But don't compile directly, we are not accessing any functionalities yet. We nee
 ---
 
 ### 2.2 Pointers
-Pointers are abstraction that aim to help programmers avoid addressing errors. 
+Pointers are abstraction that aim to help programmers avoid addressing errors. A pointer has two aspects, value and type. 
+Value indicates the location of some object and the type indicates what kind of object is stored at that location. 
 
 For a type `T`, `T*` is a variable of type `T*` that can hold the address of an object of type `T`. 
 
