@@ -7,7 +7,11 @@
 using namespace std;
 
 // 02/12/2025
-// need to think about the control loop using the bool in the parent function findpath() call
+// Originally I let dfs(...) return void, so its purpose is mutating the out variable
+// But this turns out to exercise poor control flow -> I managed to explore the paths but my traversal does not
+// correctly reocgnise a path and keeps exploring further
+// To fix this problem I added the boolean control flow
+
 class SumPath {
 private:
     class TreeNode {
@@ -27,7 +31,7 @@ private:
         // (fits our case, the children vector is an external argument, the caller never deletes or move the vector)
     public:
         int getVal() const { return val; }
-        vector<TreeNode> getChildren() { return children; }
+        vector<TreeNode> getChildren() const { return children; }
     };
 
 public:
@@ -35,20 +39,28 @@ public:
         vector<TreeNode> out;
         if (root.getVal() == target) { out.push_back(root); return out; }
 
-        bool found = false;
-        dfs(out, root, target, found);
-
+        if (dfs(out, root, target)) return out;
+        return {};
     }
 
-    bool dfs(vector<TreeNode>& out, TreeNode& root, int target, bool found) {
-        if (target - root.getVal() == 0) { found = true; }
+    /**
+     * We need to return bool, which signals, upon returning to parent function call in findPath,
+     * that we should terminate the program and return out
+     * @param out
+     * @param root
+     * @param target
+     * @return
+     */
+    bool dfs(vector<TreeNode>& out, TreeNode& root, int target) {
+        if (target - root.getVal() == 0) { return true; }
 
         target -= root.getVal();
 
         out.push_back(root);
         for (TreeNode& c : root.getChildren()) {
-            dfs(out, c, target, found);
+            if (dfs(out, c, target)) return true;
         }
         out.pop_back();
+        return false;
     }
 };
