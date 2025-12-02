@@ -86,7 +86,8 @@ char* p = &c; // p holds the address of c; & is the "address-of" operator
 ```
 
 Before considering what pointers can do, it is useful to understand why we need pointers in C++.
-Pointers are the underlying way
+C++ also C closest to machine-level thinking stores memory in a contiguous array. A pointer tells the machine
+to look at a specific memory address to instruct it where the data lives. The concept is native to the hardware memory management. 
 #### 2.2.1 Creating a Pointer
 Pointers are created using the `&` operator. This operator can be applied to any C++ expression that is categorized as 
 `lvalue`, an expression that can appear on teh left side of an assignment.
@@ -107,6 +108,9 @@ int myVariable = 10;
 int* myPointer = &myVariable; // myPointer holds the memory address of myVariable
 *myPointer = 20; // changes the value of myVariable to 20
 ```
+### 2.3 References
+
+Pointers initialize object's memory position, while references is a second name for an existing object. 
 
 ---
 ### Overloading
