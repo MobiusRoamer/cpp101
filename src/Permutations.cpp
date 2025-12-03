@@ -12,9 +12,9 @@ public:
     vector<vector<int>> permute(vector<int>& nums) {
 
         vector<vector<int>> out;
-        if (size(nums) == 0) return out;
+        if (nums.size() == 0) return out;
 
-        vector<bool> used(size(nums));
+        vector<bool> used(nums.size());
         // Note if we attempt
         // array<bool, k> used = {false};
         // we get an error because b is not compile time constant. Note here int b is not declared constant.
@@ -37,9 +37,9 @@ private:
     // then permite returns an empty vector<vector<int>> and nothing prints
     void dfs(vector<vector<int>>& out, vector<int>& path, vector<bool>& used, vector<int>& nums) {
 
-        if (size(path) == size(used)) { out.push_back(path); return; } // found a new path
+        if (path.size() == path.size()) { out.push_back(path); return; } // found a new path
 
-        for (int i = 0; i < size(used); i++) {
+        for (int i = 0; i < used.size(); i++) {
             if (used[i]) continue;
 
             // backtracking template: choose -- explore -- unchoose
@@ -56,8 +56,8 @@ private:
 
 };
 
-static void printVector(vector<int> v) {
-    for (int i = 0; i < size(v); ++i) {
+static void printVector(vector<int>& v) {
+    for (int i = 0; i < v.size(); ++i) {
         cout << v[i] << " ";
     }
     cout << endl;

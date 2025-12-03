@@ -2,7 +2,7 @@
 // Created by alyss on 2/12/2025.
 //
 
-#include "SumPath.h"
+
 #include <vector>
 using namespace std;
 
@@ -51,6 +51,7 @@ public:
      * @param target
      * @return
      */
+private:
     bool dfs(vector<TreeNode>& out, TreeNode& root, int target) {
         if (target - root.getVal() == 0) { return true; }
 

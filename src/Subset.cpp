@@ -2,13 +2,11 @@
 // Created by alyss on 1/12/2025.
 //
 
-#include "Subset.h"
-
 #include <vector>
 using namespace std;
 
 class Subset {
-
+public:
     vector<vector<int>> subsets(vector<int>& nums) {
 
         vector<vector<int>> out;
@@ -16,7 +14,7 @@ class Subset {
         dfs(path, out, 0, nums);
         return out;
     }
-
+private:
     void dfs(vector<int>& path, vector<vector<int>>& out, int currIndex, vector<int>& nums) {
 
         out.push_back(path);

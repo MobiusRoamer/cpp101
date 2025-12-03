@@ -28,7 +28,7 @@ public:
 private:
     void dfs(vector<vector<int>>& out, vector<int>& path, int currIndex, int b, int k) {
 
-        if (size(path) == k) { out.push_back(path); return; } // found a new path
+        if (path.size() == k) { out.push_back(path); return; } // found a new path
 
         for (int i = currIndex; i < b ; i++) {
 
@@ -45,8 +45,8 @@ private:
     }
 };
 
-static void printVector(vector<int> v) {
-    for (int i = 0; i < size(v); i++) {
+static void printVector(const vector<int>& v) {
+    for (int i = 0; i < v.size(); i++) {
         cout << v[i] << " ";
     }
     cout << endl;
@@ -88,7 +88,7 @@ public:
 private:
     void dfs(vector<vector<int>>& out, vector<int>& path, int currIndex, int b, int k) {
 
-        if (size(path) == k) { out.push_back(path); return; } // found a new path
+        if (path.size() == k) { out.push_back(path); return; } // found a new path
 
         for (int i = currIndex; i < b ; i++) {
 
@@ -105,7 +105,7 @@ private:
 };
 
 static void printVector(vector<int> v) {
-    for (int i = 0; i < size(v); ++i) {
+    for (int i = 0; i < v.size(); ++i) {
         cout << v[i] << " ";
     }
     cout << endl;

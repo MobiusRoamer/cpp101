@@ -40,15 +40,43 @@ But don't compile directly, we are not accessing any functionalities yet. We nee
 The purpose of types is to make memory storage more efficient. The machine will allocate different storage size 
 depending on types hence saving on memory space depending on the variables.
 
-#### 2.1.1 Integer Types
+#### 2.1.1 Integer 
 `short` (2 bytes), `int` (4 bytes), `long` (4 bytes under 32-bit OS and 8 under 64-bit OS) and `long long` (8 bytes) can all be used to store integers
 
 To read the memory consumed by a variable or a type, use `sizeof()`.
 
-#### 2.1.2 Float Types
+#### 2.1.2 Float 
 Mainly for the representation of decimals: `float` (4 bytes), `short` (8 bytes).
 
-Scientific notations can be written as `flaot f = 3e-2;;`
+When declaring float type, write `f = 3.14f;`.
+
+Scientific notations can be written as `flaot f = 3e-2;`
+
+#### 2.1.3 Character 
+A char type only takes one byte. It is not stored as the exact character but rather in the ASCII form. We can directly declare a
+char type using its ASCII code, for example
+```cpp
+char ch = 'a';
+ch = 97;
+```
+
+#### 2.1.4 String
+String is an array of char (in C style)
+```c
+char str1[] = "hello world"; 
+```
+and in C++ we declare using the `string` keyword explicitly instead of `char`.
+
+#### 2.1.5 Boolean
+Takes only one byte: `0` represents false and `1` represents true. 
+
+`~`: NEGATION
+
+`&`: AND returns the same element only when two elements are the same, returns `0` when different)
+
+`|`: OR returns the same element when two elements are the same, returns `1` when different
+
+`^`: EXCLUSIVE-OR 
 
 #### 2.1.2 Concrete Types 
    Can be instantiated using the `new` operator.
